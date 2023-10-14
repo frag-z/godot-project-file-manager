@@ -12,7 +12,7 @@ for filename in glob('../**/project.godot', recursive=True):
 
     os.makedirs(storage_dirname, exist_ok=True)
     print(filename, storage_filename)
-    shutil.copyfile(filename, storage_filename)
+    shutil.move(filename, storage_filename)
 
 
 
