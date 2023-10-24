@@ -3,7 +3,7 @@ CLI that helps manage nested godot projects
 
 # motivation
 to get started, suppose we have two separate godot projects (directories containing a `project.godot` file in their respective roots) `A` and `B`, suppose we'd like to use `B` inside of `A`, suppose that we place `B` inside of `A` like so: `A/B`, unfortunately this will not work correctly and godot will throw errors because:
-* inside of any `*.tscn` file in `B`, all `res://...` links will break because they are relative to the root of `B`, they need to be correct to be `res://B/...`
+* inside of any `*.tscn` or `*.gd` file in `B`, all `res://...` links will break because they are relative to the root of `B`, they need to be correct to be `res://B/...`
 * the godot ide will complain if there is more than one `project.godot` file in the project, which there now is because of `A/project.godot` and `A/B/project.godot`
 
 # usage
