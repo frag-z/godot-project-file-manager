@@ -55,10 +55,19 @@ def get_nested_project_file_is_in(nested_project_paths, query_path):
     assert False  # you should not be able to reach this due to the precondition
 
 
+def get_matching_filetypes_recursive(filetypes):
+    matching_files = []
+    for filetype in filetypes:
+        matching_files.extend(glob(filetype, recursive=True))
+    return matching_files
+
+
 def make_paths_nested(dry_run=True):
     nested_project_paths = get_nested_project_paths()
 
-    for filename in glob('**/*.tscn', recursive=True):
+    script_and_scene_files = get_matching_filetypes_recursive(["**/*.tscn", "**/*.gd"])
+
+    for filename in script_and_scene_files:
         dir_name = os.path.dirname(filename)
 
         if path_is_inside_nested_project(nested_project_paths, dir_name):
@@ -77,10 +86,13 @@ def make_paths_nested(dry_run=True):
                 f.close()
 
 
+
 def make_paths_un_nested(dry_run=True):
     nested_project_paths = get_nested_project_paths()
 
-    for filename in glob('**/*.tscn', recursive=True):
+    script_and_scene_files = get_matching_filetypes_recursive(["**/*.tscn", "**/*.gd"])
+
+    for filename in script_and_scene_files:
         dir_name = os.path.dirname(filename)
 
         if path_is_inside_nested_project(nested_project_paths, dir_name):
